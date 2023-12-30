@@ -3,9 +3,10 @@
 Instructions:
 - Use WASD or the arrow keys to move the snake!
 - Eat the (red) food to grow your snake!
-- Grow the biggest snake you can!
+- Grow the biggest snake you can... but don't run into yourself or the walls!
 
-## **Version 1.1 -- December 29, 2023**
+## Version History
+### **Version 1.1 -- December 29, 2023**
 Implemented:
 - Designed a main menu scene 
 - Implemented the play button so that it loads the Snake scene
