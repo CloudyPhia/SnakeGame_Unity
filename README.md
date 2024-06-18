@@ -6,6 +6,18 @@ Instructions:
 - Grow the biggest snake you can... but don't run into yourself or the walls!
 
 ## Version History
+### **Version 1.2 -- June 17, 2024**
+Implemented:
+- Quit and Settings buttons
+- Designed a Settings menu scene
+- Designed a death panel, including the implementation of two buttons: Try Again and Main Menu
+- Implemented it so that the snake stops when the death scene is instigated, and then begins again when Try Again is hit
+
+Learned:
+- Dealt with some massive bugs and issues when implementing the death panel, specifically with the button functionality working everywhere else aside from the Try Again and Main Menu buttons. Also debugged the snake's movement when the death panel is instigated!
+- How to implement panels that pop up in the same scenes!
+- and a lot more! :)) 
+
 ### **Version 1.1 -- December 29, 2023**
 Implemented:
 - Designed a main menu scene 
