@@ -10,5 +10,16 @@ public class SceneLoader : MonoBehaviour
     //  for this script!
     public void LoadScene(string sceneName) {
         SceneManager.LoadScene(sceneName);
+        Debug.Log("LoadScene button works!");
+    }
+
+    public void QuitGame() {
+        Application.Quit();
+        Debug.Log("Quit the game!");
+    }
+
+    public void ReloadCurrentScene() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("ReloadCurrentScene button works!");
     }
 }

@@ -10,17 +10,20 @@ public class SnakeScript : MonoBehaviour
 
     private Vector2 direction = Vector2.right; // snake can move in both x and y axis
     private List<Transform> segments; // List of Snake's Segments
+    private bool dead;
+
     public Transform segmentPrefab; 
     public int initialSize = 4;
 
     private void Start(){
         segments = new List<Transform>();
         segments.Add(this.transform);
+        dead = false;
 
         ResetState();
     }
 
-    // Update: called every frame your game is running (variable)
+    // Update: called every frame the game is running (variable)
     private void Update() {
         // Input Directions
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
@@ -38,19 +41,24 @@ public class SnakeScript : MonoBehaviour
     private void FixedUpdate() {
 
         // Add segments ~> iterating in reverse order such that each segment follows the head
-        for (int i = segments.Count - 1; i > 0; i--) {
-            segments[i].position = segments[i - 1].position;
-        }
 
-        // Movement of Snake
-        this.transform.position = new Vector3(
-            Mathf.Round(this.transform.position.x) + direction.x,
-            Mathf.Round(this.transform.position.y) + direction.y,
-            0.0f
-        );
+        if (!dead) {
+            for (int i = segments.Count - 1; i > 0; i--) {
+                segments[i].position = segments[i - 1].position;
+            }
+
+            // Movement of Snake
+            this.transform.position = new Vector3(
+                Mathf.Round(this.transform.position.x) + direction.x,
+                Mathf.Round(this.transform.position.y) + direction.y,
+                0.0f
+            );
+        }
     }
 
     private void ResetState() {
+        dead = false;
+
         for (int i = 1; i < segments.Count; i++) { // index 0 is snake head, thus start at index 1
             
                 Destroy(segments[i].gameObject);
@@ -63,6 +71,7 @@ public class SnakeScript : MonoBehaviour
         }
 
         this.transform.position = Vector3.zero;
+
     }
 
     private void Grow() {
@@ -77,7 +86,13 @@ public class SnakeScript : MonoBehaviour
         if (otherCollider.tag == "Food") {
             Grow();
         } else if (otherCollider.tag == "Obstacle") {
-            ResetState();
+            // ResetState();
+            dead = true;
+            PlayerDeath();
         }
     } 
+
+    private void PlayerDeath() {
+        LevelManager.instance.GameOver();
+    }
 }
