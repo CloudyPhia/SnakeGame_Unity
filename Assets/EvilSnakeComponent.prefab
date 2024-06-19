@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8742524570803120362}
   - component: {fileID: 8742524570803120360}
   m_Layer: 0
-  m_Name: SnakeComponent
+  m_Name: EvilSnakeComponent
   m_TagString: Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.18789127, g: 0.49056602, b: 0.11338555, a: 1}
+  m_Color: {r: 0.11372548, g: 0.18044338, b: 0.49019608, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

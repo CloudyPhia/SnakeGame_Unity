@@ -25,9 +25,8 @@ public class FoodScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D otherCollider) {
         
-        if (otherCollider.tag == "Player") {
+        if (otherCollider.tag == "Player" || otherCollider.tag == "EvilSnake" || otherCollider.tag == "Body") {
             RandomizePosition();
-
         }
     } 
 

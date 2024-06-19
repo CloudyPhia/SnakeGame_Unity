@@ -11,6 +11,8 @@ public class SnakeScript : MonoBehaviour
     private Vector2 direction = Vector2.right; // snake can move in both x and y axis
     private List<Transform> segments; // List of Snake's Segments
     private bool dead;
+    public float speed;
+    private string prevDir;
 
     public Transform segmentPrefab; 
     public int initialSize = 4;
@@ -19,6 +21,7 @@ public class SnakeScript : MonoBehaviour
         segments = new List<Transform>();
         segments.Add(this.transform);
         dead = false;
+        prevDir = "";
 
         ResetState();
     }
@@ -26,14 +29,18 @@ public class SnakeScript : MonoBehaviour
     // Update: called every frame the game is running (variable)
     private void Update() {
         // Input Directions
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && (prevDir != "down")) {
             direction = Vector2.up;
-        } else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) {
+            prevDir = "up";
+        } else if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && (prevDir != "right")) {
             direction = Vector2.left;
-        } else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) {
+            prevDir = "left";
+        } else if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && (prevDir != "up")) {
             direction = Vector2.down;
-        } else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
+            prevDir = "down";
+        } else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && (prevDir != "left")) {
             direction = Vector2.right;
+            prevDir = "right";
         }
     }
 
@@ -51,7 +58,7 @@ public class SnakeScript : MonoBehaviour
             this.transform.position = new Vector3(
                 Mathf.Round(this.transform.position.x) + direction.x,
                 Mathf.Round(this.transform.position.y) + direction.y,
-                0.0f
+                speed * Time.deltaTime
             );
         }
     }
@@ -85,10 +92,10 @@ public class SnakeScript : MonoBehaviour
         
         if (otherCollider.tag == "Food") {
             Grow();
-        } else if (otherCollider.tag == "Obstacle") {
-            // ResetState();
-            dead = true;
-            PlayerDeath();
+        } else if (otherCollider.tag == "Obstacle" || otherCollider.tag == "Body" || otherCollider.tag == "EvilSnake") {
+            ResetState();
+            // dead = true;
+            // PlayerDeath();
         }
     } 
 

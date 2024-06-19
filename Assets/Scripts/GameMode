@@ -1,0 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public static class GameMode
+{
+    // NOT IMPLEMENTED YET
+
+    
+    // public static bool gameModeEndlessOrNot = false;
+    // public static bool gameModeEnemies = false;
+
+    // public void endLessOrNotToggle(bool endlessToggled) {
+    //     // code here 
+    //     gameModeEndlessOrNot = endlessToggled;
+    // }
+
+    // public void gameModeEnemiesToggled(bool enemiesToggled) {
+    //     // code here 
+    //     // only available in endless mode currently
+    //     gameModeEnemies = enemiesToggled;
+    // }
+}
