@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - Body
   - EvilSnake
+  - EnemyModeButton
   layers:
   - Default
   - TransparentFX

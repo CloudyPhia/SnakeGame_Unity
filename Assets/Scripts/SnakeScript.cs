@@ -21,7 +21,7 @@ public class SnakeScript : MonoBehaviour
         segments = new List<Transform>();
         segments.Add(this.transform);
         dead = false;
-        prevDir = "";
+        prevDir = "right"; // snake starts out going right
 
         ResetState();
     }
@@ -93,9 +93,15 @@ public class SnakeScript : MonoBehaviour
         if (otherCollider.tag == "Food") {
             Grow();
         } else if (otherCollider.tag == "Obstacle" || otherCollider.tag == "Body" || otherCollider.tag == "EvilSnake") {
-            ResetState();
-            // dead = true;
-            // PlayerDeath();
+            if (GameMode.gameModeEndlessOrNot) {
+                // If the gamemode is Endless, just reset
+                ResetState();
+            } else {
+                // if the gamemode is not endless, instigate try again panel
+                dead = true;
+                PlayerDeath();
+            }
+            
         }
     } 
 
