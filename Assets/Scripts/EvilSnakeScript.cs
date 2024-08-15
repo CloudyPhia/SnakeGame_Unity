@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// import GameMode;
+
 public class EvilSnakeScript : MonoBehaviour
 {
     private Transform target; 
@@ -14,15 +16,21 @@ public class EvilSnakeScript : MonoBehaviour
     public int initialSize = 4;
 
     private void Start(){
+        if (!GameMode.gameModeEnemies) {
+            gameObject.SetActive(false);
+            Destroy(this.GetComponent<BoxCollider2D>());
+            Destroy(this);
+        } else {
+            gameObject.SetActive(true);
+            segments = new List<Transform>();
+            segments.Add(this.transform);
+            speed = 0.1f;
+            prevDir = "right";
+            
+            target = GameObject.FindGameObjectWithTag("Food").GetComponent<Transform>();
 
-        segments = new List<Transform>();
-        segments.Add(this.transform);
-        speed = 0.1f;
-        prevDir = "";
-        
-        target = GameObject.FindGameObjectWithTag("Food").GetComponent<Transform>();
-
-        ResetState();
+            ResetState();
+        }
     }
 
     // Update: called every frame the game is running (variable)
@@ -31,13 +39,14 @@ public class EvilSnakeScript : MonoBehaviour
         // float xdistance = Vector3.Distance(target.transform.position.x, this.transform.position.x);
         // float ydistance = Vector3.Distance(target.transform.position.y, this.transform.position.y);
 
-        // negative means move left, positive means move right
+        
         float xpos = Mathf.Abs(target.transform.position.x - this.transform.position.x); 
-        // negative means move down, positive means move up 
         float ypos = Mathf.Abs(target.transform.position.y - this.transform.position.y);
         // Input Directions
 
+        // negative means move left, positive means move right
         float xp = target.transform.position.x - this.transform.position.x;
+        // negative means move down, positive means move up 
         float yp = target.transform.position.y - this.transform.position.y;
 
         if ( (ypos >= xpos) && (yp >= 0) && prevDir != "up") {
@@ -59,11 +68,9 @@ public class EvilSnakeScript : MonoBehaviour
     private void FixedUpdate() {
 
         // Add segments ~> iterating in reverse order such that each segment follows the head
-
         for (int i = segments.Count - 1; i > 0; i--) {
             segments[i].position = segments[i - 1].position;
         }
-
         // Movement of Snake
         this.transform.position = new Vector3(
             Mathf.Round(this.transform.position.x) + direction.x,
@@ -104,8 +111,6 @@ public class EvilSnakeScript : MonoBehaviour
         } else if (otherCollider.tag == "Obstacle" || otherCollider.tag == "Body" || otherCollider.tag == "Player") {
             // StartCoroutine(WaitForFunction(5));
             ResetState();
-            // dead = true;
-            // PlayerDeath();
         }
     } 
 
