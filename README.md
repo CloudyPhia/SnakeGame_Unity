@@ -4,9 +4,28 @@ Instructions:
 - Use WASD or the arrow keys to move the snake!
 - Eat the (red) food to grow your snake!
 - Grow the biggest snake you can... but don't run into yourself or the walls!
+- Play in regular or Endless mode! In Endless mode, you can play against a high-difficulty blue enemy snake!
 - When in Enemy game mode, avoid the blue enemy snake and don't let it eat your food! 
 
 ## Version History
+### **Version 1.4 -- August 14, 2024**
+This will probably be the last update for a while as I plan on making some games in Unreal Engine, and this was mainly meant to be a practice to familiarize myself with Unity! 
+
+Implemented:
+- Endless mode and enemy mode!
+- The toggles for endless mode and enemy mode! I also made it so that the "Enemy Mode" toggle is only triggerable when "Endless Mode" is toggled on, otherwise the GameObject is not active. 
+- Re-implemented the death screen for non-endless mode
+- Added a main menu button so that you can access the main menu at any point during any mode of the snake game. This button disappears when the death screen appears, if in non-endless mode! 
+
+Learned:
+- Setting visibility/activity for GameOjects and game modes via the scripts based on boolean values
+- Read up on A* pathfinding and learned how it works!
+
+Plan to implement in the future:
+- A* pathfinding for my enemy snake as currently I currently just have a rudimentary script that allows it to move. It runs into itself, so pathfinding would be nice to add.
+- Would love to add music, and a staff credits section!
+- Would also love to update the movement script at some point.
+
 ### **Version 1.3 -- June 18, 2024**
 Note, the pause menu is currently disabled for better integration and testing of the new enemy feature!
 Implemented:
@@ -18,13 +37,8 @@ Learned:
 - Did not use in this version update but I learned a lot about coroutines for waiting in Unity / C#
 - A lot about making the enemy snake chase after the food! It was really fun to figure out the math conversions there, and I was happy to find a simple way to do it even though it took me awhile because I was overcomplicating things initially :)
 
-Problems to solve (Too tired to think about them right now, reminding myself by writing it down here):
-- Enemy snake keeps running into himself, potentially find a way to have him sense where his body is and where the walls are and not go in those directions?
-- Toggling game modes from the settings screen (a different scene), potentially doing this via some sort of global class? 
-- How to make the player snake faster than the enemy snake by a little bit
-
 Future implementation:
-- re-implementing the pause menu once enemy snake testing is complete
+- re-implementing the death screen once enemy snake testing is complete
 - Adding the gamemode toggling feature to the settings menu 
 
 ### **Version 1.2 -- June 17, 2024**
